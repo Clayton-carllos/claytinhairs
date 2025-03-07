@@ -30,7 +30,7 @@ app.config['MAIL_DEFAULT_SENDER'] = 'clayton.carllos08@gmail.com'  # Remetente p
 mail = Mail(app)  # Inicializa o Flask-Mail
 
 # Configuração do banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_uVySjk2Utn1g@ep-billowing-resonance-a8xwts6q-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:wEgzYaQAABGGlsUKPlMSSAMRnhgVPDKe@hopper.proxy.rlwy.net:53065/railway'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
