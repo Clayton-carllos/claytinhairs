@@ -11,8 +11,9 @@ from flask import Response
 from flask_migrate import Migrate
 from sqlalchemy import cast, Time
 from flask_mail import Mail, Message
-from twilio.rest import Client
 from flask import flash
+import pytz
+
 
 
 
@@ -119,9 +120,6 @@ def agendar():
         mail.send(msg_admin)
     except Exception as e:
         flash(f'Erro ao enviar e-mail para o administrador: {e}', 'danger')
-
-    # Mensagem flash para informar o sucesso
-    flash('Agendamento realizado com sucesso! O cliente e o administrador foram notificados.', 'success')
 
     return redirect(url_for('index'))  # Redireciona de volta ao formulário
 
@@ -266,8 +264,9 @@ def home():
     # Total de agendamentos
     total_agendamentos = Agendamento.query.count()
 
-    # Pega a data e hora atuais
-    agora = datetime.now()
+    # Pega a data e hora atuais no fuso horário de São Paulo
+    br_tz = pytz.timezone("America/Sao_Paulo")
+    agora = datetime.now(br_tz)  # Agora com fuso horário de São Paulo
     
    # Agendamentos futuros (contando)
     agendamentos_futuros = db.session.query(Agendamento).filter(

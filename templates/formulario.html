@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form action="/agendar" method="POST">
+    <form id="form-agendamento" action="/agendar" method="POST">
         <h2>Agende Seu Horario</h2>
 
         <label for="nome">Nome</label>
@@ -52,9 +52,13 @@
           <option value="Corte + Platinado" class="corte">Corte + Platinado</option>
         </select>
 
-        <button type="submit">Agendar Horario</button>
+        <button type="submit" id="btn-agendar">
+            Agendar Horário
+            <span id="loading-icon" class="spinner-border spinner-border-sm" style="display:none;" role="status" aria-hidden="true"></span>
+        </button>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const dataInput = document.querySelector('#data');  // Campo de data
@@ -149,6 +153,35 @@
                     let telefone = telefoneInput.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
                     telefoneInput.value = telefone;  // Atualiza o valor do input
                 }
+            });
+        });
+
+        // SCRIPT PARA O DESATIVAR O BOTÃO DE AGENDAR, APÓS SER APERTADO
+        $(document).ready(function() {
+            $('#form-agendamento').submit(function(e) {
+                e.preventDefault();  // Impede o envio padrão do formulário
+
+                // Desativa o botão, muda o estilo e exibe o ícone de carregamento
+                $('#btn-agendar').prop('disabled', true).addClass('loading');
+                $('#loading-icon').css('display', 'inline-block'); // Mostra o ícone de carregamento
+
+                // Envia os dados do formulário via AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/agendar',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Se o agendamento for bem-sucedido, você pode redirecionar ou mostrar uma mensagem
+                        alert('Agendamento realizado com sucesso!');
+                        window.location.href = '/';  // Exemplo de redirecionamento após o sucesso
+                    },
+                    error: function() {
+                        // Se ocorrer um erro, reativa o botão e oculta o ícone de carregamento
+                        alert('Erro ao agendar. Tente novamente.');
+                        $('#btn-agendar').prop('disabled', false).removeClass('loading');
+                        $('#loading-icon').hide();
+                    }
+                });
             });
         });
     </script>

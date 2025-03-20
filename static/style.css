@@ -99,6 +99,22 @@ input::placeholder, textarea::placeholder {
   }
 }
 
+/* Estilo para o botão desativado */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilo para o ícone de carregamento */
+.spinner-border {
+  display: none;
+  margin-left: 10px;
+}
+
+button.loading .spinner-border {
+  display: inline-block;
+}
+
 /* Mantém o CSS original abaixo */
 
 header {
