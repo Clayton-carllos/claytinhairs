@@ -29,7 +29,7 @@ app.config['MAIL_DEFAULT_SENDER'] = 'clayton.carllos08@gmail.com'  # Remetente p
 mail = Mail(app)  # Inicializa o Flask-Mail
 
 # Configuração do banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:kkpxsqSiItqiOEyVjEnwrlWiQYapDbHE@shortline.proxy.rlwy.net:55238/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:tiChWtGllmzZQSwqryimRnwRxkShPvSy@hopper.proxy.rlwy.net:44817/railway'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
