@@ -157,33 +157,38 @@
         });
 
         // SCRIPT PARA O DESATIVAR O BOTÃO DE AGENDAR, APÓS SER APERTADO
-        $(document).ready(function() {
-            $('#form-agendamento').submit(function(e) {
-                e.preventDefault();  // Impede o envio padrão do formulário
+       $(document).ready(function() {
+    $('#form-agendamento').submit(function(e) {
+        e.preventDefault();  // Impede o envio padrão do formulário
 
-                // Desativa o botão, muda o estilo e exibe o ícone de carregamento
-                $('#btn-agendar').prop('disabled', true).addClass('loading');
-                $('#loading-icon').css('display', 'inline-block'); // Mostra o ícone de carregamento
+        // Desativa o botão, muda o estilo e exibe o ícone de carregamento
+        $('#btn-agendar').prop('disabled', true).addClass('loading');
+        $('#loading-icon').css('display', 'inline-block'); // Mostra o ícone de carregamento
 
-                // Envia os dados do formulário via AJAX
-                $.ajax({
-                    type: 'POST',
-                    url: '/agendar',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        // Se o agendamento for bem-sucedido, você pode redirecionar ou mostrar uma mensagem
-                        alert('Agendamento realizado com sucesso!');
-                        window.location.href = '/';  // Exemplo de redirecionamento após o sucesso
-                    },
-                    error: function() {
-                        // Se ocorrer um erro, reativa o botão e oculta o ícone de carregamento
-                        alert('Erro ao agendar. Tente novamente.');
-                        $('#btn-agendar').prop('disabled', false).removeClass('loading');
-                        $('#loading-icon').hide();
-                    }
-                });
-            });
+        // Envia os dados do formulário via AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/agendar',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    // Se o agendamento for bem-sucedido, você pode redirecionar ou mostrar uma mensagem
+                    alert('Agendamento realizado com sucesso!');
+                    window.location.href = '/';  // Exemplo de redirecionamento após o sucesso
+                } else {
+                    // Se o horário estiver ocupado, mostra a mensagem de erro
+                    alert(response.message || 'Horário já ocupado. Por favor, escolha outro horário.');
+                }
+            },
+            error: function() {
+                // Se ocorrer um erro, reativa o botão e oculta o ícone de carregamento
+                alert('Horário já ocupado. Por favor, escolha outro horário.');
+                $('#btn-agendar').prop('disabled', false).removeClass('loading');
+                $('#loading-icon').hide();
+            }
         });
+    });
+});
     </script>
 
 </body>

@@ -13,6 +13,7 @@ from sqlalchemy import cast, Time
 from flask_mail import Mail, Message
 from flask import flash
 import pytz
+from flask import jsonify
 
 
 app = Flask(__name__)
@@ -81,7 +82,17 @@ def agendar():
     horario = request.form['horario']
     mensagem = request.form.get('mensagem')
 
-    # Criação de um novo agendamento
+    # Verificar se o horário já está ocupado para a data
+    agendamento_existente = Agendamento.query.filter_by(data=data, horario=horario).first()
+
+    if agendamento_existente:
+        # Retorna uma resposta JSON indicando que o horário já está ocupado
+        return jsonify({
+            "success": False,
+            "message": "Horário já ocupado. Por favor, escolha outro horário."
+        }), 400  # Status HTTP 400 (Bad Request)
+    
+    # Caso contrário, cria o novo agendamento
     novo_agendamento = Agendamento(
         nome=nome, telefone=telefone, email=email, data=data, horario=horario, mensagem=mensagem
     )
@@ -95,7 +106,7 @@ def agendar():
         msg_cliente = Message(
             subject='Confirmação de Agendamento',
             recipients=[email],  # E-mail do cliente
-            body=f"Olá {nome}, seu agendamento foi confirmado para {data.strftime('%d/%m/%Y')} às {horario}.",
+            body=f"Olá {nome}, seu agendamento do serviço {mensagem} foi confirmado para {data.strftime('%d/%m/%Y')} às {horario}.",
             reply_to=app.config['MAIL_DEFAULT_SENDER']  # Opcional, para respostas
         )
         mail.send(msg_cliente)
@@ -119,7 +130,11 @@ def agendar():
     except Exception as e:
         flash(f'Erro ao enviar e-mail para o administrador: {e}', 'danger')
 
-    return redirect(url_for('index'))  # Redireciona de volta ao formulário
+    # Retorna uma resposta JSON indicando sucesso
+    return jsonify({
+        "success": True,
+        "message": "Agendamento realizado com sucesso!"
+    }), 200  # Status HTTP 200 (OK)
 
 # Rota para exibir o formulário de adicionar usuário
 @app.route('/adicionar_usuario', methods=['GET', 'POST'])
