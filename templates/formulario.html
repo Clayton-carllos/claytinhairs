@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento de Corte</title>
+    <title>Agendamento PetShop</title>
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 
     <form id="form-agendamento" action="/agendar" method="POST">
-        <h2>Agende Seu Horario</h2>
+        <h2>Agende o horário do seu Pet</h2>
 
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
+        <label for="nome">Nome Cliente</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome Cliente" required>
 
-        <label for="telefone">Telefone</label>
+        <label for="telefone">Telefone Cliente</label>
         <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="seu email" required>
+        <label for="email">Email Cliente</label>
+        <input type="email" id="email" name="email" placeholder="Email Cliente" required>
 
         <label for="data">Data</label>
         <input type="date" id="data" name="data" required min="{{ today_date }}">
@@ -41,15 +41,15 @@
             <option value="21:00" class="horario-disponivel">21:00</option>
         </select>
 
-        <label for="mensagem">Corte</label>
+        <label for="mensagem">Serviço</label>
         <select name="mensagem" id="mensagem" required>
-          <option value="">Escolha seu corte</option>
-          <option value="Corte simples" class="corte">Corte simples</option>
-          <option value="Corte + Sobrancelha" class="corte">Corte + Sobrancelha</option>
-          <option value="Corte + Sobrancelha + Barba" class="corte">Corte + Sobrancelha + Barba</option>
-          <option value="Corte + Luzes " class="corte">Corte + Luzes</option>
-          <option value="Corte + Luzes + Sobrancelha" class="corte">Corte + Luzes + Sobrancelha</option>
-          <option value="Corte + Platinado" class="corte">Corte + Platinado</option>
+          <option value="">Escolha o serviço</option>
+          <option value="Banho" class="corte">Banho</option>
+          <option value="Tosa na máquina" class="corte">Tosa na máquina</option>
+          <option value="Tosa na tesoura" class="corte">Tosa na tesoura</option>
+          <option value="Tosa higiênica" class="corte">Tosa higiênica</option>
+          <option value="Escovação de dentes" class="corte">Escovação de dentes</option>
+          <option value="Corte de unhas" class="corte">Corte de unhas</option>
         </select>
 
         <button type="submit" id="btn-agendar">
