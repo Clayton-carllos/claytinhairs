@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Sora', sans-serif;
-  background-color: #06121e;
+  background-color: #e2c0b6;
   width: 100%;
   height: 100vh;
   position: relative;
@@ -58,8 +58,8 @@ textarea {
 
 button[type="submit"] {
   padding: 14px;
-  color: #fff;
-  background-color: #d34040;
+  color: #000000;
+  background-color: #cfa09a;
   border: none;
   font-size: 18px;
   font-weight: 600;
@@ -69,11 +69,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #a13b3b;
+  background-color: #b07c76;
 }
 
 input:focus, select:focus, textarea:focus {
-  border-color: #d34040;
+  border-color: #cfa09a;
 }
 
 input[type="text"], input[type="email"], input[type="tel"] {

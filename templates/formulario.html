@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento PetShop</title>
+    <title>Agendamento Dra. Fulana</title>
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 
     <form id="form-agendamento" action="/agendar" method="POST">
-        <h2>Agende o horário do seu Pet</h2>
+        <h2>Agende seu hórario</h2>
 
-        <label for="nome">Nome Cliente</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome Cliente" required>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome" required>
 
-        <label for="telefone">Telefone Cliente</label>
+        <label for="telefone">Telefone</label>
         <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
 
-        <label for="email">Email Cliente</label>
-        <input type="email" id="email" name="email" placeholder="Email Cliente" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
 
         <label for="data">Data</label>
         <input type="date" id="data" name="data" required min="{{ today_date }}">
@@ -44,12 +44,12 @@
         <label for="mensagem">Serviço</label>
         <select name="mensagem" id="mensagem" required>
           <option value="">Escolha o serviço</option>
-          <option value="Banho" class="corte">Banho</option>
-          <option value="Tosa na máquina" class="corte">Tosa na máquina</option>
-          <option value="Tosa na tesoura" class="corte">Tosa na tesoura</option>
-          <option value="Tosa higiênica" class="corte">Tosa higiênica</option>
-          <option value="Escovação de dentes" class="corte">Escovação de dentes</option>
-          <option value="Corte de unhas" class="corte">Corte de unhas</option>
+          <option value="Massagem Relaxante R$ 80,00" class="corte">Massagem Relaxante | R$ 80,00</option>
+          <option value="Massagem Terapêutica R$ 90,00" class="corte">Massagem Terapêutica | R$ 90,00</option>
+          <option value="Massagem Modeladora R$ 100,00" class="corte">Massagem Modeladora | R$ 100,00</option>
+          <option value="Massagem Pré Natal R$ 90,00" class="corte">Massagem Pré Natal | R$ 90,00</option>
+          <option value="Pedras Quentes R$ 110,00" class="corte">Pedras Quentes | R$ 110,00</option>
+          <option value="Drenagem R$ 90,00" class="corte">Drenagem | R$ 90,00</option>
         </select>
 
         <button type="submit" id="btn-agendar">
