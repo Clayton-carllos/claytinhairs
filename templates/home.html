@@ -11,6 +11,7 @@
 
     <title>CRS - Admin</title>
 
+    <link rel="icon" href="../static/imagens/favicon.ico" type="image/x-icon">
     <!-- Custom fonts for this template -->
     <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -168,7 +169,7 @@
                                                                 <th>Cliente</th>
                                                                 <th>Data</th>
                                                                 <th>Horário</th>
-                                                                <th>Mensagem</th>
+                                                                <th>Serviço</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -177,7 +178,7 @@
                                                                 <td>{{ agendamento.nome }}</td>
                                                                 <td>{{ agendamento.data.strftime('%d/%m/%Y') }}</td>
                                                                 <td>{{ agendamento.horario }}</td>
-                                                                <td>{{ agendamento.mensagem or 'Nenhuma mensagem' }}</td>
+                                                                <td>{{ agendamento.mensagem or 'Nenhum agendamento' }}</td>
                                                             </tr>
                                                             {% else %}
                                                             <tr>

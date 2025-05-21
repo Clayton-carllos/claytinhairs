@@ -250,17 +250,25 @@ def lista_agendamentos():
         flash('Você precisa estar logado para acessar esta página.', 'warning')
         return redirect(url_for('login'))
     
-    # Recupera o nome do usuário logado
-    nome_usuario = session.get('username')  # Obtém o nome do usuário da sessão
-
+    nome_usuario = session.get('username')
     filtro = request.args.get('filtro', default=None)
-    
+    data_especifica = request.args.get('data')
+
+    query = Agendamento.query
+
     if filtro == 'hoje':
-        # Filtra apenas os agendamentos de hoje
-        agendamentos = Agendamento.query.filter(Agendamento.data == datetime.today().date()).all()
+        agendamentos = query.filter(Agendamento.data == datetime.today().date()) \
+                            .order_by(Agendamento.data, Agendamento.horario).all()
+    elif filtro == 'data' and data_especifica:
+        try:
+            data_convertida = datetime.strptime(data_especifica, "%Y-%m-%d").date()
+            agendamentos = query.filter(Agendamento.data == data_convertida) \
+                                .order_by(Agendamento.data, Agendamento.horario).all()
+        except ValueError:
+            flash("Formato de data inválido. Use YYYY-MM-DD.", "danger")
+            agendamentos = query.order_by(Agendamento.data, Agendamento.horario).all()
     else:
-        # Caso contrário, exibe todos os agendamentos
-        agendamentos = Agendamento.query.all()
+        agendamentos = query.order_by(Agendamento.data, Agendamento.horario).all()
 
     return render_template('lista_agendamentos.html', agendamentos=agendamentos, nome_usuario=nome_usuario)
 

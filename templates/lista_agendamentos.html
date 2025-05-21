@@ -11,6 +11,8 @@
 
     <title>CRS - Agendamentos</title>
 
+    <link rel="icon" href="../static/imagens/favicon.ico" type="image/x-icon">
+
     <!-- Custom fonts for this template -->
     <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -131,15 +133,30 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary text-center">Agendamentos</h6>
-                            <div>
-                                <a href="{{ url_for('lista_agendamentos', filtro='hoje') }}" class="btn btn-primary mt-3">
-                                    Filtrar por Hoje
-                                </a>
-                                <a href="{{ url_for('lista_agendamentos') }}" class="btn btn-secondary mt-3">
-                                    Exibir Todos
-                                </a>
+                    
+                            <div class="row align-items-center mt-3">
+                                <!-- Coluna dos botões (ocupa toda a largura no mobile, metade no desktop) -->
+                                <div class="col-12 col-md-6 d-flex gap-2 mb-2 mb-md-0">
+                                    <a href="{{ url_for('lista_agendamentos', filtro='hoje') }}" class="btn btn-primary">
+                                        Filtrar por Hoje
+                                    </a>
+                                    <a href="{{ url_for('lista_agendamentos') }}" class="btn btn-secondary ml-2">
+                                        Exibir Todos
+                                    </a>
+                                </div>
+                    
+                                <!-- Coluna do formulário (também responsiva) -->
+                                <div class="col-12 col-md-6 d-flex justify-content-md-end">
+                                    <form method="get" action="{{ url_for('lista_agendamentos') }}" class="d-flex flex-column flex-md-row align-items-stretch gap-2">
+                                        <input type="hidden" name="filtro" value="data">
+                                        <input type="date" name="data" class="form-control mb-1" required>
+                                        <button type="submit" class="btn btn-info ml-2">Filtrar</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                    </div>
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
